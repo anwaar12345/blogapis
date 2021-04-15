@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Tag;
 class TagSeeder extends Seeder
 {
     /**
@@ -11,6 +11,6 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Tag::class,5)->create();
     }
 }
