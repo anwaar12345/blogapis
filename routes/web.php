@@ -1,5 +1,7 @@
 <?php
-
+use App\Category;
+use App\Tag;
+use App\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +14,21 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    $categories = Category::select('id','title')->orderBy('title')->get();
+//    dump($categories);
+//    $tags = Tag::select('id','name')->get();
+//    dump($tags);
+// $tagConditions = Tag::select('id','name')->orderByDesc('id')->get();
+// dump($tagConditions);
+// $tagConditions = Tag::select('id','name')->orderByDesc(
+//     \DB::Table('post_tag')
+//     ->selectRaw('COUNT(tag_id) AS tag_count')
+//     ->whereColumn('tags.id','post_tag.tag_id')
+//     ->orderBy('tag_count','desc')
+//     ->limit(1)
+// )->get();// Most Used Tags
+// dump($tagConditions);
+
+$latest_posts = Post::select('id','title')->latest()->take(5)->withCount('comments')->get();
+dump($latest_posts);
 });
