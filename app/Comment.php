@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Post;
 class Comment extends Model
 {
-    public function comments()
+    public function post()
     {
         return $this->belongsTo('App\Post');
     }
 }
+    
