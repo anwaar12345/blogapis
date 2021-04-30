@@ -1,5 +1,5 @@
 <?php
-
+use App\Reservation;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,5 +30,10 @@ try {
 $conn = null;
 });
 Route::get('/', function () {
-    return view('welcome');
+    $check_in = "2020-06-20";
+    $check_out = "2020-06-08";
+  $results = Reservation::where(function($q) use($check_in,$check_outch){
+    $q->where('check_in','>',$check_in);
+    $q->where('check_in','>=',$check_out);
+  });
 });
