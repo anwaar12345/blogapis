@@ -30,10 +30,16 @@ try {
 $conn = null;
 });
 Route::get('/', function () {
-    $check_in = "2020-06-20";
-    $check_out = "2020-06-08";
-  $results = Reservation::where(function($q) use($check_in,$check_outch){
-    $q->where('check_in','>',$check_in);
-    $q->where('check_in','>=',$check_out);
-  });
+
+  //   $check_in = "2020-06-20";
+  //   $check_out = "2020-06-08";
+  // $results = Reservation::where(function($q) use($check_in,$check_out){
+  //   $q->where('check_in','>',$check_in);
+  //   $q->where('check_in','>=',$check_out);
+  // })->orWhere(function($q) use($check_in,$check_out){
+  //   $q->where('check_out','<=',$check_in);
+  //   $q->where('check_out','<',$check_out);
+  // })->get();
+  // dump($results);
+
 });
