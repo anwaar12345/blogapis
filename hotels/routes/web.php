@@ -31,8 +31,8 @@ $conn = null;
 });
 Route::get('/', function () {
 
-  //   $check_in = "2020-06-20";
-  //   $check_out = "2020-06-08";
+    $check_in = "2020-06-20";
+    $check_out = "2020-06-08";
   // $results = Reservation::where(function($q) use($check_in,$check_out){
   //   $q->where('check_in','>',$check_in);
   //   $q->where('check_in','>=',$check_out);
@@ -42,4 +42,16 @@ Route::get('/', function () {
   // })->get();
   // dump($results);
 
+$results = \DB::table('rooms')->whereNotExists(
+  function($q) use($check_in,$check_out){
+    $q->select('reservations.id')
+    ->from('reservations')
+    ->join('reservation_room','reservations.id','=','reservation_room.reservation_id')
+    ->where(function($query) use($check_in,$check_out){
+      $query->where('check_out','>',$check_in);
+      $query->where('check_in','<',$check_out);
+    })->limit(1); 
+  }
+)->paginate(10);
+dump($results);
 });
